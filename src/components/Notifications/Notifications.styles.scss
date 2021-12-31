@@ -1,0 +1,16 @@
+.list {
+  max-height: calc(90vh);
+  overflow: scroll;
+  border: 1px solid lightgray;
+}
+
+.filter {
+  height: 40px;
+  padding: 8px;
+  box-sizing: border-box;
+  border:1px solid lightgray;
+}
+
+.container {
+  flex:1
+}

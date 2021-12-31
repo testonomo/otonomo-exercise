@@ -1,28 +1,16 @@
 import './App.css'
 import React from 'react'
-import generateCarData from './api/data-generator'
-import createStreamerFrom from './api/streamer'
-import logo from './logo.svg'
+import SidePanel from './components/SidePanel/SidePanel'
+import Notifications from './components/Notifications/Notfications'
+import { useManageVINs } from './useManageVins'
+
 
 const App = () => {
-  const [carData, setCarData] = React.useState({})
-  const streamer = React.useMemo(() => createStreamerFrom(() => generateCarData('12345678901234567')), [])
-
-  React.useEffect(() => {
-    streamer.subscribe(setCarData)
-    streamer.start()
-    return () => { }
-  }, [streamer])
-
+  const { carData, handleNewVIN, handleVINCheck, VINs } = useManageVINs();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <div>
-          Edit <code>src/App.tsx</code> and save to reload.
-          <pre>{JSON.stringify(carData)}</pre>
-        </div>
-      </header>
+    <div className='App flex'>
+      <SidePanel onNewVIN={handleNewVIN} onVINCheck={handleVINCheck} VINs={VINs} />
+      <Notifications carData={carData} />
     </div>
   )
 }
